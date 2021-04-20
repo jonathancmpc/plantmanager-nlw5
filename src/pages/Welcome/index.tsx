@@ -1,27 +1,37 @@
 import React from 'react';
 import wateringImg from '../../assets/watering.png'
 
-import { Button } from '../../components/Button';
+import { ButtonNext } from '../../components/ButtonNext';
 
-import { Container, Title, SubTitle, ImageStyled } from './styles';
+import { fonts } from '../../styles/fonts';
+import { 
+  Container, 
+  Title, 
+  SubTitle, 
+  ImageStyled 
+} from './styles';
 
 export function Welcome() {
   return (
     <Container>
-      <Title>
+      <Title style={fonts.Jost_600SemiBold}>
         Gerencie {'\n'} 
-        suas plantas de forma {'\n'} 
-        fácil
+        suas plantas de{'\n'} 
+        forma fácil
       </Title>
 
-      <ImageStyled source={wateringImg} />
+      <ImageStyled 
+        source={wateringImg} 
+        resizeMode="contain"
+      />
 
-      <SubTitle>
-        Não esqueça mais de regar suas plantas.
-        Nós cuidamos de lembrar você sempre que precisar.
+      <SubTitle style={fonts.Jost_400Regular}>
+        Não esqueça mais de regar suas{'\n'} 
+        plantas. Nós cuidamos de lembrar você {'\n'} 
+        sempre que precisar.
       </SubTitle>
 
-      <Button nameIcon="chevron-right" />
+      <ButtonNext nameIcon="chevron-right" />
       
     </Container>
   )

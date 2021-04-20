@@ -1,26 +1,13 @@
 import React from 'react';
+import { fonts } from '../../styles/fonts';
+import { Container, Text } from './styles';
 
-import { ButtonContainer, ButtonText, Icon } from './styles';
-
-interface ButtonProps {
-  text?: string;
-  nameIcon?: string;
-}
-
-export function Button({ text, nameIcon }: ButtonProps) {
-  return (
-    <ButtonContainer text={!!text} activeOpacity={0.7}>
-      {text && (
-        <ButtonText>{text}</ButtonText>
-      )}
-      {nameIcon && (
-        <Icon 
-          isVisible={!!nameIcon} 
-          name={nameIcon} 
-          size={20} 
-          color="#fff" 
-        />
-      )}
-    </ButtonContainer>
-  )
+export function Button() {
+  return(
+    <Container>
+      <Text style={fonts.Jost_400Regular}>
+        Confirmar
+      </Text>
+    </Container>
+  );
 }

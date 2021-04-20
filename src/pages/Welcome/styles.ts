@@ -1,20 +1,20 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import colors from '../../styles/colors';
 
 export const Container = styled.SafeAreaView `
   flex: 1;
   align-items: center;
-  justify-content: space-between;
-  padding: ${Platform.OS === 'android' ? 25 : 0}px 0 0 0;
+  justify-content: space-around;
+  padding: ${Platform.OS === 'android' ? 25 : 0}px 20px;
 `;
 
 export const Title = styled.Text `
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 28px;
   text-align: center;
   color: ${colors.heading};
   margin-top: 38px;
+  line-height: 34px;
 `;
 
 export const SubTitle = styled.Text `
@@ -25,6 +25,5 @@ export const SubTitle = styled.Text `
 `;
 
 export const ImageStyled = styled.Image `
-  width: 292px;
-  height: 284px;
+  height: ${Dimensions.get('window').width * 0.7}px;
 `;
