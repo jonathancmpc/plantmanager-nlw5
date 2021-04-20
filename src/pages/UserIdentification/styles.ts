@@ -1,10 +1,11 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { Platform, Dimensions } from 'react-native';
 import colors from '../../styles/colors';
 
 interface TextInputProps {
   isFocused: boolean;
   isFilled: boolean;
+  isError: boolean;
 }
 
 export const Container = styled.SafeAreaView `
@@ -54,6 +55,10 @@ export const Input = styled.TextInput<TextInputProps> `
     props.isFocused || props.isFilled 
       ? colors.green 
       : colors.gray
+  };
+
+  ${props => props.isError && 
+    css`border-color: ${colors.red};`    
   }
 `;
 

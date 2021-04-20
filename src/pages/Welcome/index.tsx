@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 import wateringImg from '../../assets/watering.png'
 
 import { ButtonNext } from '../../components/ButtonNext';
@@ -12,6 +13,12 @@ import {
 } from './styles';
 
 export function Welcome() {
+  const navigation = useNavigation();
+
+  function handleStart() {
+    navigation.navigate('UserIdentification');
+  }
+
   return (
     <Container>
       <Title style={fonts.Jost_600SemiBold}>
@@ -31,7 +38,7 @@ export function Welcome() {
         sempre que precisar.
       </SubTitle>
 
-      <ButtonNext nameIcon="chevron-right" />
+      <ButtonNext nameIcon="chevron-right" onPress={handleStart} />
       
     </Container>
   )

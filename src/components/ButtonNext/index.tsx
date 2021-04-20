@@ -1,16 +1,16 @@
 import React from 'react';
-import { ButtonProps } from 'react-native';
 
 import { ButtonContainer, ButtonText, Icon } from './styles';
 
 interface ButtonNextProps {
   text?: string;
   nameIcon?: string;
+  onPress: () => void;
 }
 
-export function ButtonNext({ text, nameIcon, ...rest }: ButtonNextProps) {
+export function ButtonNext({ text, nameIcon, onPress, ...rest }: ButtonNextProps) {
   return (
-    <ButtonContainer text={!!text} activeOpacity={0.7} {...rest}>
+    <ButtonContainer text={!!text} activeOpacity={0.7} onPress={onPress} {...rest}>
       {text && (
         <ButtonText>{text}</ButtonText>
       )}
