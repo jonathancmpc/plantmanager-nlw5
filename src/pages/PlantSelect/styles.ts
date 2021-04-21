@@ -27,3 +27,13 @@ export const FlatListEnviroment = styled(FlatList)`
   height: 40px;
   margin: 32px 0 0 32px;
 `;
+
+export const ContainerListCardPLants = styled.View`
+  flex: 1;
+  padding: 0 20px;
+  margin-top: 30px;
+`;
+
+export const FlatListCardPlants = styled(FlatList)`
+  
+`;
