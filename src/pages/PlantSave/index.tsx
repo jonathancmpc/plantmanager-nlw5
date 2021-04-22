@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import { SvgFromUri } from 'react-native-svg';
 import watedropImg from '../../assets/waterdrop.png';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
@@ -32,10 +32,11 @@ export function PlantSave() {
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios'); // Retorna verdadeiro por padrão caso seja IOS, pois o datepicker padrão do IOS não precisa apertar um botão.
 
+  const navigation = useNavigation();
   const route = useRoute();
   const { plant } = route.params as Params;
 
-  function handleChangeTime(event: Event, dateTime: Date | undefined) {
+  function handleChangeTime(_: Event, dateTime: Date | undefined) {
     if(Platform.OS === 'android') {
       setShowDatePicker(oldState => !oldState);
     }
@@ -60,6 +61,14 @@ export function PlantSave() {
       await savePlant({
         ...plant,
         dateTimeNotification: selectedDateTime
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'tudo certo',
+        subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.',
+        buttonTitle: 'Muito obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants'
       });
     } catch {
       return Alert.alert('Não foi possível salvar :(');
