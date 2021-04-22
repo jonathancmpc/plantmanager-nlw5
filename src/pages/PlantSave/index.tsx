@@ -5,7 +5,7 @@ import { SvgFromUri } from 'react-native-svg';
 import watedropImg from '../../assets/waterdrop.png';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { format, isBefore } from 'date-fns';
-import { loadPlant, PlantProps, savePlant } from '../../libs/storage';
+import { PlantProps, savePlant } from '../../libs/storage';
 
 import { Button } from '../../components/Button';
 
