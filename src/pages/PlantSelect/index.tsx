@@ -38,6 +38,8 @@ interface PlantsProps {
 export function PlantSelect() {
   const [enviroments, setEnviroments] = useState<EnviromentProps[]>([]);
   const [plants, setPlants] = useState<PlantsProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
+  const [enviromentSelected, setEnviromentSelected] = useState('all');
 
   useEffect(() => {
     async function fetchEnviroment() {
@@ -59,10 +61,25 @@ export function PlantSelect() {
     async function fetchPlants() {
       const { data } = await api.get('plants?_sort=name&_order=asc');
       setPlants(data);
+      setFilteredPlants(data);
     }
 
     fetchPlants();
   }, []);
+
+  function handleEnviromentSelected(key: string) {
+    setEnviromentSelected(key);
+
+    if(key === 'all') {
+      return setFilteredPlants(plants);
+    }
+
+    const filtered = plants.filter(plant => 
+      plant.environments.includes(key)
+    );
+
+    setFilteredPlants(filtered);
+  }
 
 
   return (
@@ -85,6 +102,8 @@ export function PlantSelect() {
             <EnviromentButton 
               key={item.id}
               title={item.title}
+              active={item.key === enviromentSelected}
+              onPress={() => handleEnviromentSelected(item.key)}
             />
           )}
           horizontal
@@ -94,7 +113,7 @@ export function PlantSelect() {
 
       <ContainerListCardPLants>
         <FlatListCardPlants
-          data={plants}
+          data={filteredPlants}
           renderItem={({ item }) => (
             <PlantCardPrimary 
               data={item}
