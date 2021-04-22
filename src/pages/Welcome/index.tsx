@@ -16,8 +16,8 @@ export function Welcome() {
   const navigation = useNavigation();
 
   function handleStart() {
-    //navigation.navigate('UserIdentification');
-    navigation.navigate('PlantSelect');
+    navigation.navigate('UserIdentification');
+    //navigation.navigate('PlantSelect');
   }
 
   return (

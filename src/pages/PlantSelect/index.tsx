@@ -16,6 +16,7 @@ import {
   FlatListCardPlants,
   ContainerListCardPLants
 } from './styles';
+import { Load } from '../../components/Load';
 
 interface EnviromentProps {
   key: string;
@@ -40,6 +41,7 @@ export function PlantSelect() {
   const [plants, setPlants] = useState<PlantsProps[]>([]);
   const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
   const [enviromentSelected, setEnviromentSelected] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchEnviroment() {
@@ -62,6 +64,7 @@ export function PlantSelect() {
       const { data } = await api.get('plants?_sort=name&_order=asc');
       setPlants(data);
       setFilteredPlants(data);
+      setLoading(false);
     }
 
     fetchPlants();
@@ -82,6 +85,9 @@ export function PlantSelect() {
   }
 
 
+  if(loading) {
+    return <Load />
+  }
   return (
     <Container>
       <HeaderContent>
