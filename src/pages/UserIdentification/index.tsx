@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   TouchableWithoutFeedback, 
   Keyboard, 
@@ -44,11 +45,12 @@ export function UserIdentification() {
     setName(value);
   }
 
-  function handleSubmit() {
-    if ( isFilled ) {
-      navigation.navigate('Confirmation');
-    } else {
+  async function handleSubmit() {
+    if ( !name ) {
       setIsError(true);
+    } else {
+      await AsyncStorage.setItem('@plantmanager:user', name);
+      navigation.navigate('Confirmation');
     }
   }
 
