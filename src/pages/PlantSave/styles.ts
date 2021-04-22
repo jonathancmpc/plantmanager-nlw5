@@ -68,3 +68,14 @@ export const AlertLable = styled.Text`
   font-size: 12px;
   margin-bottom: 5px;
 `;
+
+export const ButtonDateTimePicker = styled.TouchableOpacity`
+  width: 100%;
+  align-items: center;
+  padding: 40px 0;
+`;
+
+export const DateTimePickerText = styled.Text`
+  color: ${colors.heading};
+  font-size: 24px;
+`;

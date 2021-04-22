@@ -5,7 +5,8 @@ import {
   TouchableWithoutFeedback, 
   Keyboard, 
   KeyboardAvoidingView, 
-  Platform 
+  Platform, 
+  Alert
 } from 'react-native';
 
 import { Button } from '../../components/Button';
@@ -48,9 +49,12 @@ export function UserIdentification() {
   async function handleSubmit() {
     if ( !name ) {
       setIsError(true);
-    } else {
-      await AsyncStorage.setItem('@plantmanager:user', name);
+    }
+    try{
+      await AsyncStorage.setItem('@plantmanager:user', name!);
       navigation.navigate('Confirmation');
+    } catch {
+      Alert.alert('Ops! Não foi possível salvar o seu nome :(');
     }
   }
 
