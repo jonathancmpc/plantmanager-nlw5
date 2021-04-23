@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { loadPlant, PlantProps } from '../../libs/storage';
 import { formatDistance } from 'date-fns/esm';
 import { pt } from 'date-fns/locale';
-import waterdropImage from '../../assets/waterdrop.png';
+import { FlatList } from 'react-native-gesture-handler';
 
+import { PlantCardSecondary } from '../../components/PlantCardSecondary';
+import { Load } from '../../components/Load';
 import { Header } from '../../components/Header';
 
+import waterdropImage from '../../assets/waterdrop.png';
 import { 
   Container, 
   Spotlight, 
@@ -15,8 +18,7 @@ import {
   SpotlightText
 } from './styles';
 import { fonts } from '../../styles/fonts';
-import { FlatList } from 'react-native-gesture-handler';
-import { PlantCardSecondary } from '../../components/PlantCardSecondary';
+
 
 export function MyPlants() {
   const [myPlants, setMyPlants] = useState<PlantProps[]>();
@@ -46,6 +48,10 @@ export function MyPlants() {
     loadStorageData();
   }, []);
 
+
+  if(loading) {
+    return <Load />
+  }
   return (
     <Container>
       <Header />
