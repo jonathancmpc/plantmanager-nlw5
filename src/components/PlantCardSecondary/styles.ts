@@ -16,7 +16,7 @@ export const Title = styled.Text`
   flex: 1;
   margin-left: 10px;
   font-size: 17px;
-  color: ${colors.heading}
+  color: ${colors.heading};
 `;
 
 export const Details = styled.View`
@@ -32,4 +32,16 @@ export const Time = styled.Text`
   margin-top: 5px;
   font-size: 16px;
   color: ${colors.body_dark};
+`;
+
+export const ButtonRemove =styled(RectButton) `
+  width: 100px;
+  height: 85px;
+  background-color: ${colors.red};
+  margin-top: 15px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  right: 20px;
+  padding-left: 10px;
 `;

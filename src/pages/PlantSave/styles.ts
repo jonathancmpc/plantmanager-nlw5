@@ -2,11 +2,28 @@ import styled from 'styled-components/native';
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../../styles/colors';
 
+/* export const Scroll = styled(ScrollView)`
+  margin-top: ${getStatusBarHeight() || 25}px;
+  flex-grow: 1;
+  background-color: ${colors.shape};
+  justify-content: space-between;
+`; */
+
+export const Scroll = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: {
+    justifyContent: 'space-between',
+  },
+}))`
+  flex: 1;
+  background-color: ${colors.background};
+  margin-top: ${getStatusBarHeight() || 25}px;
+`;
+
 export const Container = styled.SafeAreaView`
   margin-top: ${getStatusBarHeight() || 25}px;
   flex: 1;
   justify-content: space-between;
-  background-color: ${colors.shape};
+  background-color: ${colors.background};
 `;
 
 export const PlantInfo = styled.View`

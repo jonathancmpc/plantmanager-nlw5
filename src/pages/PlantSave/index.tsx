@@ -21,7 +21,8 @@ import {
   TipText,
   AlertLable,
   DateTimePickerText,
-  ButtonDateTimePicker
+  ButtonDateTimePicker,
+  Scroll
 } from './styles';
 
 interface Params {
@@ -76,59 +77,63 @@ export function PlantSave() {
   }
 
   return (
-    <Container>
-      <PlantInfo>
-        <SvgFromUri 
-          uri={plant.photo}
-          height={150}
-          width={150}
-        />
-
-        <Title style={fonts.Jost_600SemiBold}>{plant.name}</Title>
-
-        <SubTitle style={fonts.Jost_400Regular}>{plant.about}</SubTitle>
-
-      </PlantInfo>
-
-      <Controller>
-        <TipContainer>
-          <TipImage source={watedropImg}/>
-
-          <TipText style={fonts.Jost_400Regular}>
-            {plant.water_tips}
-          </TipText>
-        </TipContainer>
-
-        <AlertLable style={fonts.Jost_400Regular}>
-          Escolha o melhor horário para ser lembrado:
-        </AlertLable>
-
-        {showDatePicker && (
-          <DateTimePicker 
-            value={selectedDateTime}
-            mode="time"
-            display="spinner"
-            onChange={handleChangeTime}
+    <Scroll
+      showsVerticalScrollIndicator={false}
+    >
+      <Container>
+        <PlantInfo>
+          <SvgFromUri 
+            uri={plant.photo}
+            height={150}
+            width={150}
           />
-        )}
 
-        {
-          Platform.OS === 'android' && (
-            <ButtonDateTimePicker onPress={handleOpenDateTimePickerForAndroid}>
-              <DateTimePickerText style={fonts.Jost_400Regular}>
-                {`Mudar Horário - ${format(selectedDateTime, 'HH:mm')}h`}
-              </DateTimePickerText>
-            </ButtonDateTimePicker>
-          )
-        }
+          <Title style={fonts.Jost_600SemiBold}>{plant.name}</Title>
 
-        <Button 
-          title="Cadastrar planta"
-          onPress={handleSave}
-        />
-        
-      </Controller>
-    </Container>
+          <SubTitle style={fonts.Jost_400Regular}>{plant.about}</SubTitle>
+
+        </PlantInfo>
+
+        <Controller>
+          <TipContainer>
+            <TipImage source={watedropImg}/>
+
+            <TipText style={fonts.Jost_400Regular}>
+              {plant.water_tips}
+            </TipText>
+          </TipContainer>
+
+          <AlertLable style={fonts.Jost_400Regular}>
+            Escolha o melhor horário para ser lembrado:
+          </AlertLable>
+
+          {showDatePicker && (
+            <DateTimePicker 
+              value={selectedDateTime}
+              mode="time"
+              display="spinner"
+              onChange={handleChangeTime}
+            />
+          )}
+
+          {
+            Platform.OS === 'android' && (
+              <ButtonDateTimePicker onPress={handleOpenDateTimePickerForAndroid}>
+                <DateTimePickerText style={fonts.Jost_400Regular}>
+                  {`Mudar Horário - ${format(selectedDateTime, 'HH:mm')}h`}
+                </DateTimePickerText>
+              </ButtonDateTimePicker>
+            )
+          }
+
+          <Button 
+            title="Cadastrar planta"
+            onPress={handleSave}
+          />
+          
+        </Controller>
+      </Container>
+    </Scroll>
   );
 };
 

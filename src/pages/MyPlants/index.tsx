@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { loadPlant, PlantProps } from '../../libs/storage';
+import { loadPlant, PlantProps, StoragePlantProps } from '../../libs/storage';
 import { formatDistance } from 'date-fns/esm';
 import { pt } from 'date-fns/locale';
-import { FlatList } from 'react-native-gesture-handler';
+import { Alert, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { PlantCardSecondary } from '../../components/PlantCardSecondary';
 import { Load } from '../../components/Load';
@@ -48,6 +49,38 @@ export function MyPlants() {
     loadStorageData();
   }, []);
 
+  function handleRemove(plant: PlantProps) {
+    Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+      {
+        text: 'Não 🙏',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😰',
+        onPress: async () => {
+          try {
+            const data = await AsyncStorage.getItem('@plantmanager:plants');
+            const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
+
+            delete plants[plant.id];
+
+            await AsyncStorage.setItem(
+              '@plantmanager:plants',
+              JSON.stringify(plants)
+            );
+
+            setMyPlants((oldData) => 
+              oldData?.filter((item) => item.id !== plant.id)
+            );
+
+          } catch (error) {
+            Alert.alert('Não foi possível remover! 😰')
+          }
+        }
+      }
+    ]);
+  }
+
 
   if(loading) {
     return <Load />
@@ -68,7 +101,9 @@ export function MyPlants() {
           data={myPlants}
           keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
-            <PlantCardSecondary data={item} />
+            <PlantCardSecondary 
+              handleRemove={() => handleRemove(item)} 
+              data={item} />
           )}
         />
       </Plants>
