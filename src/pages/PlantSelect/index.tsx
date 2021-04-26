@@ -37,26 +37,6 @@ export function PlantSelect() {
 
   const navigation = useNavigation()
 
-  async function fetchPlants() {
-    const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
-    
-    if(!data) {
-      return setLoading(true);
-    }
-
-    if(page > 1) {
-      setPlants(oldValuePlants => [...oldValuePlants, ...data ]);       
-      setFilteredPlants(oldValuePlants => [...oldValuePlants, ...data ]);     
-    } else {
-      setPlants(data);
-      setFilteredPlants(data);
-    }
-
-    
-    setLoading(false);
-    setLoadingMore(false);
-  }
-
   useEffect(() => {
     async function fetchEnviroment() {
       const { data } = await api.get('plants_environments?_sort=title&_order=asc');
@@ -76,6 +56,25 @@ export function PlantSelect() {
   useEffect(() => {
     fetchPlants();
   }, []);
+
+  async function fetchPlants() {
+    const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
+    
+    if(!data) {
+      return setLoading(true);
+    }
+
+    if(page > 1) {
+      setPlants(oldValuePlants => [...oldValuePlants, ...data ]);       
+      setFilteredPlants(oldValuePlants => [...oldValuePlants, ...data ]);     
+    } else {
+      setPlants(data);
+      setFilteredPlants(data);
+    }
+    
+    setLoading(false);
+    setLoadingMore(false);
+  }
 
   function handleEnviromentSelected(key: string) {
     setEnviromentSelected(key);
