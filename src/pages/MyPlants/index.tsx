@@ -66,6 +66,7 @@ export function MyPlants() {
             );
 
           } catch (error) {
+            console.log(error);
             Alert.alert('Não foi possível remover! 😰')
           }
         }
